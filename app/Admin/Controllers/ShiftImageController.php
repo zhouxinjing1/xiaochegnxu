@@ -104,8 +104,15 @@ class ShiftImageController extends Controller
 
         $grid->id('ID')->sortable();
         $grid->url('图片组')->image(80, 80);
-        $grid->type('类型')->display(function ($data){
-            return $data[1];
+        $grid->type('类型')->display(function ($type){
+            switch ($type) {
+                case 1:
+                    return  '<span class="label label-warning">首页</span>';
+                case 2:
+                    return  '<span class="label label-danger">卖车</span>';
+                case 3:
+                    return  '<span class="label label-success">买车</span>';
+            }
         });
         $grid->title('备注')->editable();
         $grid->created_at('创建时间');
