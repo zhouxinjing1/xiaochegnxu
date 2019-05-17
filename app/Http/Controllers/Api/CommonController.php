@@ -20,6 +20,11 @@ class CommonController extends Controller
 {
     private $limit = 8;
 
+    /**
+     * 轮播图
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getBanner(Request $request)
     {
         $data = ShiftImage::where('type', $request->type)->first();
@@ -31,6 +36,10 @@ class CommonController extends Controller
         return ReturnJson::response($data);
     }
 
+    /**
+     * 系统信息
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getSystem()
     {
         $data = SystemOther::find(1);
@@ -38,6 +47,11 @@ class CommonController extends Controller
         return ReturnJson::response($data);
     }
 
+    /**
+     * 新闻列表
+     * @param Request $request
+     * @return NewCollection
+     */
     public function getNewList(Request $request)
     {
         $data = News::select('id', 'title', 'image', 'created_at', 'summary')->offset($request->page)->paginate($this->limit);
@@ -45,6 +59,11 @@ class CommonController extends Controller
         return new NewCollection($data);
     }
 
+    /**
+     * 新闻资讯
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getNewInfo(Request $request)
     {
         $data = News::find($request->id);

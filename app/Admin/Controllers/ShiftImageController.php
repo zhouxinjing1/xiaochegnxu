@@ -106,6 +106,8 @@ class ShiftImageController extends Controller
                     return  '<span class="label label-danger">卖车</span>';
                 case 3:
                     return  '<span class="label label-success">买车</span>';
+                case 4:
+                    return  '<span class="label label-default">新闻</span>';
             }
         });
         $grid->title('备注')->editable();

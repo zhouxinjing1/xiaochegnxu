@@ -10,6 +10,11 @@ use App\Http\Controllers\Common\ReturnJson;
 
 class LoginController extends Controller
 {
+    /**
+     * 账号登录
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function login(Request $request)
     {
         $user = User::where('email', $request->email)->first();
@@ -18,14 +23,11 @@ class LoginController extends Controller
         }
 
         if (decrypt($user->password) === $request->password) {
-
             if (empty($user->status)) {
                 return ReturnJson::response($user,'300','账号已关闭, 请联系管理员');
             }
-
             return ReturnJson::response($user,'200','成功');
         }
-
         return ReturnJson::response($user,'300','密码错误');
     }
 }
