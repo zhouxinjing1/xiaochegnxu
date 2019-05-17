@@ -18,6 +18,8 @@ Route::group([
 ],function (Router $router){
     $router->get('/common/getBanner', 'CommonController@getBanner')->where(['type' => '[0-9]+']);
     $router->get('/common/getSystem','CommonController@getSystem');
+    $router->get('/common/page/getNewList','CommonController@getNewList')->where(['page' => '[0-9]+']);
+    $router->get('/common/getNewInfo','CommonController@getNewInfo')->where(['id' => '[0-9]+']);
     $router->post('/login/login','LoginController@login');
     $router->get('/login/getOpenid','LoginController@getOpenid');
 });

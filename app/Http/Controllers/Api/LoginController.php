@@ -18,6 +18,11 @@ class LoginController extends Controller
         }
 
         if (decrypt($user->password) === $request->password) {
+
+            if (empty($user->status)) {
+                return ReturnJson::response($user,'300','账号已关闭, 请联系管理员');
+            }
+
             return ReturnJson::response($user,'200','成功');
         }
 

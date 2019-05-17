@@ -13,9 +13,13 @@ use App\Http\Controllers\Common\ReturnJson;
 use App\Model\SystemOther;
 use App\Model\ShiftImage;
 use App\Handlers\Operation;
+use App\Model\News;
+use App\Http\Resources\NewCollection;
 
 class CommonController extends Controller
 {
+    private $limit = 8;
+
     public function getBanner(Request $request)
     {
         $data = ShiftImage::where('type', $request->type)->first();
@@ -30,6 +34,20 @@ class CommonController extends Controller
     public function getSystem()
     {
         $data = SystemOther::find(1);
+
+        return ReturnJson::response($data);
+    }
+
+    public function getNewList(Request $request)
+    {
+        $data = News::select('id', 'title', 'image', 'created_at', 'summary')->offset($request->page)->paginate($this->limit);
+
+        return new NewCollection($data);
+    }
+
+    public function getNewInfo(Request $request)
+    {
+        $data = News::find($request->id);
 
         return ReturnJson::response($data);
     }

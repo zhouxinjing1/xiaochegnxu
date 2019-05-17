@@ -8,9 +8,10 @@ use Encore\Admin\Form;
 use Encore\Admin\Layout\Content;
 
 
-
 use App\Model\SystemOther;
 use Illuminate\Http\Request;
+use App\Tool\UploadTool;
+
 
 class SystemOtherController extends Controller
 {
@@ -37,6 +38,11 @@ class SystemOtherController extends Controller
     {
         $so = SystemOther::find($request->id);
         $so->toastr = $request->toastr;
+
+        if (!is_null($request->about_image)){
+            $so->about_image = UploadTool::upload_once($request, 'about_image');
+        }
+
         $so->save();
 
         admin_toastr('操作成功');
@@ -63,6 +69,7 @@ class SystemOtherController extends Controller
 
         $form->hidden('id');
         $form->text('toastr', '系统通知');
+        $form->image('about_image','关于我们');
 
         return $form;
     }

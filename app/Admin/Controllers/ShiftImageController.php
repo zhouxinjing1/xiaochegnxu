@@ -11,6 +11,7 @@ use Encore\Admin\Layout\Content;
 use App\Model\ShiftImage;
 use Illuminate\Http\Request;
 use App\Tool\ImageTool;
+use App\Tool\UploadTool;
 
 class ShiftImageController extends Controller
 {
@@ -55,14 +56,7 @@ class ShiftImageController extends Controller
 
     public function addUrl($request, $id)
     {
-        $disk = \Storage::disk('qiniu');
-        $data = $request->file('url');
-
-        $array = [];
-        foreach ($data as $v) {
-            $filename = $disk->put(date('Y/m/d'), $v);
-            $array[] = spellUrl($filename);
-        }
+        $array = UploadTool::upload_many($request, 'url');
 
         $si = ShiftImage::find($id);
         $si->url = ImageTool::addJson($si->url, $array);

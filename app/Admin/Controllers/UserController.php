@@ -115,7 +115,7 @@ class UserController extends Controller
         $grid->phone('手机号');
         $grid->sex('性别')->using(['2' => '女', '1' => '男']);
         $grid->city('城市');
-        $grid->money('余额')->label('danger');
+        $grid->money('余额')->label('danger')->sortable();
         $grid->type('来源')->display(function ($data){
             return $data[1];
         });

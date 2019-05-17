@@ -22,5 +22,8 @@ Route::group([
     // 客户
     $router->resource('/user','UserController');
 
+    // 新闻资讯
+    $router->resource('/new','NewController');
+
 
 });
