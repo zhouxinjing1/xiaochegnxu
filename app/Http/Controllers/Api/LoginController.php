@@ -57,7 +57,7 @@ class LoginController extends Controller
             ]
         );
 
-        return ReturnJson::response($user,'200','成功');
+        return ReturnJson::response(User::find($user->id),'200','成功');
     }
 
 
