@@ -10,6 +10,7 @@ use Encore\Admin\Layout\Content;
 
 use App\Model\User;
 use Illuminate\Http\Request;
+use App\Tool\UploadTool;
 
 class UserController extends Controller
 {
@@ -65,9 +66,27 @@ class UserController extends Controller
         if (!empty($request->password)) {
             $user->password = $request->password;
         }
+        if (!empty($request->img)) {
+            $user->img   = UploadTool::upload_once($request, 'img');
+        }
         $user->save();
     }
 
+    public function store(Request $request)
+    {
+        $user = new User();
+        $user->name = $request->name;
+        $user->img  = UploadTool::upload_once($request, 'img');
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->password = $request->password;
+        $user->sex  = $request->sex;
+        $user->city =$request->city;
+        $user->save();
+
+        admin_toastr('操作成功');
+        return  redirect('/admin/user');
+    }
 
 
     public function setStatus($id, $status)
@@ -111,6 +130,7 @@ class UserController extends Controller
 
         $grid->id('ID')->sortable();
         $grid->name('昵称');
+        $grid->img('头像')->image(35, 35);
         $grid->email('邮箱号');
         $grid->phone('手机号');
         $grid->sex('性别')->using(['2' => '女', '1' => '男']);
@@ -134,6 +154,7 @@ class UserController extends Controller
         });
 
         $form->text('name','昵称');
+        $form->image('img','头像')->required();
         $form->email('email', '邮箱号')->required()->rules('unique:users');
         $form->mobile('phone','手机号')->required()->rules('unique:users');
 
