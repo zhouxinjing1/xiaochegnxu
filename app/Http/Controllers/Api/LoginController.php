@@ -46,7 +46,7 @@ class LoginController extends Controller
             return ReturnJson::response([],'300',$data['errcode'].'/'.$data['errmsg']);
         }
 
-        $user = User::firstOrCreate(
+        $user = User::updateOrCreate(
             ['openid' => $data['openid']],
             [
                 'name' => $request->nickName,
