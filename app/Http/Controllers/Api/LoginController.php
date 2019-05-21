@@ -27,7 +27,17 @@ class LoginController extends Controller
             if (empty($user->status)) {
                 return ReturnJson::response([],'300','账号已关闭, 请联系管理员');
             }
-            return ReturnJson::response($user,'200','成功');
+
+            $data = CurlTool::getCurl($this->getUrl($request));
+            if (!isset($data['openid'])) {
+                return ReturnJson::response([],'300',$data['errcode'].'/'.$data['errmsg']);
+            }
+
+            User::where('id', $user->id)->update([
+                'openid' => $data['openid']
+            ]);
+
+            return ReturnJson::response(User::find($user->id),'200','成功');
         }
         return ReturnJson::response([],'300','密码错误');
     }
@@ -38,10 +48,7 @@ class LoginController extends Controller
      */
     public function getOpenid(Request $request)
     {
-        $url = 'https://api.weixin.qq.com/sns/jscode2session?appid='.config('other.appid').
-            '&secret='.config('other.secret').'&js_code='.$request->code.'&grant_type=authorization_code';
-
-        $data = CurlTool::getCurl($url);
+        $data = CurlTool::getCurl($this->getUrl($request));
         if (!isset($data['openid'])) {
             return ReturnJson::response([],'300',$data['errcode'].'/'.$data['errmsg']);
         }
@@ -58,6 +65,12 @@ class LoginController extends Controller
         );
 
         return ReturnJson::response(User::find($user->id),'200','成功');
+    }
+
+    private function getUrl($request) {
+
+        return  'https://api.weixin.qq.com/sns/jscode2session?appid='.config('other.appid').
+            '&secret='.config('other.secret').'&js_code='.$request->code.'&grant_type=authorization_code';
     }
 
 
