@@ -43,6 +43,10 @@ class SystemOtherController extends Controller
             $so->about_image = UploadTool::upload_once($request, 'about_image');
         }
 
+        if (!is_null($request->user_instructions)){
+            $so->user_instructions = UploadTool::upload_once($request, 'user_instructions');
+        }
+
         $so->save();
 
         admin_toastr('操作成功');
@@ -70,6 +74,7 @@ class SystemOtherController extends Controller
         $form->hidden('id');
         $form->text('toastr', '系统通知');
         $form->image('about_image','关于我们');
+        $form->image('user_instructions','用户须知');
 
         return $form;
     }
