@@ -23,9 +23,9 @@ class User extends Authenticatable
     {
         switch ($type) {
             case 1:
-                return ['入驻客户', '<span class="label label-success">入驻客户</span>'];
+                return ['入驻客户', '<span class="label label-success">入驻客户</span>', 1];
             case 2:
-                return ['授权客户', '<span class="label label-warning">授权客户</span>'];
+                return ['授权客户', '<span class="label label-warning">授权客户</span>', 2];
         }
     }
 
