@@ -25,5 +25,8 @@ Route::group([
     // 新闻资讯
     $router->resource('/new','NewController');
 
+    // 车辆信息
+    $router->resource('/good/','GoodController');
+
 
 });

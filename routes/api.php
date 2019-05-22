@@ -22,6 +22,9 @@ Route::group([
     $router->get('/common/getNewInfo','CommonController@getNewInfo')->where(['id' => '[0-9]+']);
     $router->post('/login/login','LoginController@login');
     $router->post('/login/getOpenid','LoginController@getOpenid');
+
+    $router->post('/good/createGood', 'GoodController@createGood')->middleware('verificationLogin');
+    $router->post('/upload/uploadImage', 'UploadController@uploadImage');
 });
 
 

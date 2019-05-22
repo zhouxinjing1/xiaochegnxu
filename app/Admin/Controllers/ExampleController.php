@@ -9,6 +9,7 @@ use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 
+
 class ExampleController extends Controller
 {
     use HasResourceActions;

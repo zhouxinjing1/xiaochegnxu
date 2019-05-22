@@ -9,6 +9,8 @@ use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 
+use App\Model\Good;
+
 class GoodController extends Controller
 {
     use HasResourceActions;
@@ -78,7 +80,8 @@ class GoodController extends Controller
      */
     protected function grid()
     {
-        $grid = new Grid(new YourModel);
+        $grid = new Grid(new Good);
+        $grid->disableCreateButton();
 
         $grid->id('ID')->sortable();
         $grid->created_at('Created at');
@@ -95,7 +98,7 @@ class GoodController extends Controller
      */
     protected function detail($id)
     {
-        $show = new Show(YourModel::findOrFail($id));
+        $show = new Show(Good::findOrFail($id));
 
         $show->id('ID');
         $show->created_at('Created at');
@@ -111,7 +114,7 @@ class GoodController extends Controller
      */
     protected function form()
     {
-        $form = new Form(new YourModel);
+        $form = new Form(new Good);
 
         $form->display('id', 'ID');
         $form->display('created_at', 'Created At');
