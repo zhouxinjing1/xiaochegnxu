@@ -38,6 +38,7 @@ class SystemOtherController extends Controller
     {
         $so = SystemOther::find($request->id);
         $so->toastr = $request->toastr;
+        $so->phone  = $request->phone;
 
         if (!is_null($request->about_image)){
             $so->about_image = UploadTool::upload_once($request, 'about_image');
@@ -73,6 +74,7 @@ class SystemOtherController extends Controller
 
         $form->hidden('id');
         $form->text('toastr', '系统通知');
+        $form->mobile('phone','客服联系方式');
         $form->image('about_image','关于我们');
         $form->image('user_instructions','用户须知');
 
