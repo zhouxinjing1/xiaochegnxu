@@ -5,6 +5,7 @@ namespace App\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Model\Good;
 
 class User extends Authenticatable
 {
@@ -32,5 +33,11 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = encrypt($value);
+    }
+
+
+    public function good()
+    {
+        return $this->hasOne(Good::class);
     }
 }

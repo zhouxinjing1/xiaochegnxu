@@ -26,7 +26,7 @@ Route::group([
     $router->resource('/new','NewController');
 
     // 车辆信息
-    $router->resource('/good/','GoodController');
+    $router->resource('/good','GoodController');
 
 
 });
