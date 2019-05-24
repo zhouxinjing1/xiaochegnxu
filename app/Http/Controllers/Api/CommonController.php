@@ -18,7 +18,7 @@ use App\Http\Resources\NewCollection;
 
 class CommonController extends Controller
 {
-    private $limit = 2;
+    private $limit = 6;
 
     /**
      * 轮播图

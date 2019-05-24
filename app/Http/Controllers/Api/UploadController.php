@@ -18,7 +18,6 @@ class UploadController extends Controller
 
         $data['url']  = $url;
         $data['name'] = $request->user;
-
         return ReturnJson::response($data);
     }
 }
