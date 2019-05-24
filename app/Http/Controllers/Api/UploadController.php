@@ -11,10 +11,14 @@ class UploadController extends Controller
 {
     public function uploadImage(Request $request)
     {
-        $data = UploadTool::upload_once($request, $request->name);
-        if (empty($data)) {
+        $url = UploadTool::upload_once($request, 'name');
+        if (empty($url)) {
             return ReturnJson::response('300','上传出错!');
         }
+
+        $data['url']  = $url;
+        $data['name'] = $request->user;
+
         return ReturnJson::response($data);
     }
 }
