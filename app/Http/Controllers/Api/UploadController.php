@@ -15,6 +15,6 @@ class UploadController extends Controller
         if (empty($data)) {
             return ReturnJson::response('300','上传出错!');
         }
-        ReturnJson::response($data);
+        return ReturnJson::response($data);
     }
 }
