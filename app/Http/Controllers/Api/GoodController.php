@@ -5,9 +5,15 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Good;
+use App\Http\Controllers\Common\ReturnJson;
 
 class GoodController extends Controller
 {
+    /**
+     * 发布商品
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function createGood(Request $request)
     {
         $good = new Good();
@@ -35,6 +41,13 @@ class GoodController extends Controller
         $good->choose_right = $request->choose_right;
         $good->choose_left =$request->choose_left;
         $good->user_id  = $request->user_id;
-        $good->save();
+        $good->type = $request->type;
+        $good->price = $request->price;
+
+        if ($good->save()) {
+            return ReturnJson::response([],'200','发布成功');
+        }
+
+        return ReturnJson::response([],'300','发布失败');
     }
 }
