@@ -22,7 +22,7 @@ class GoodController extends Controller
         $good->transmission = $request->transmission;
         $good->year = $request->year;
         $good->mileage = $request->mileage;
-        $good->city = $request->city;
+        $good->city = json_encode($request->city);
         $good->change_number = $request->change_number;
         $good->overview = $request->overview;
         $good->car_is = $request->car_is;
