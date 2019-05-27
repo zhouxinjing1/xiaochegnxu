@@ -70,6 +70,10 @@ class GoodController extends Controller
     protected function grid()
     {
         $grid = new Grid(new Good);
+
+        $grid->model()->where('status', '=', 1);
+        $grid->model()->orderBy('created_at', 'desc');
+
         $grid->disableCreateButton();
 
         $grid->id('ID')->sortable();

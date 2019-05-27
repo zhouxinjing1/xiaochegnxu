@@ -20,9 +20,9 @@ class GoodController extends Controller
         $good->brand = $request->brand;
         $good->displacement = $request->displacement;
         $good->transmission = $request->transmission;
-        $good->year = $request->year;
+        $good->year = spellCity($request->year,0,'-');
         $good->mileage = $request->mileage;
-        $good->city = json_encode($request->city);
+        $good->city = $request->city[1];
         $good->change_number = $request->change_number;
         $good->overview = $request->overview;
         $good->car_is = $request->car_is;
@@ -43,6 +43,7 @@ class GoodController extends Controller
         $good->user_id  = $request->user_id;
         $good->type = $request->type;
         $good->price = $request->price;
+        $good->money = $request->money;
 
         if ($good->save()) {
             return ReturnJson::response([],'200','发布成功');

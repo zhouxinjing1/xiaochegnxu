@@ -18,7 +18,7 @@ class Good extends Model
         parent::boot();
 
         static::addGlobalScope(function(Builder $builder) {
-            $builder->orderBy('created_at', 'desc');
+            $builder->where('pay_status',1);
         });
     }
 
