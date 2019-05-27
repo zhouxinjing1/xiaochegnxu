@@ -26,14 +26,6 @@ class SystemOtherController extends Controller
     }
 
 
-//    public function edit($id, Content $content)
-//    {
-//        return $content
-//            ->header('Edit')
-//            ->description('description')
-//            ->body($this->form()->edit($id));
-//    }
-
     public function update(Request $request)
     {
         $so = SystemOther::find($request->id);
