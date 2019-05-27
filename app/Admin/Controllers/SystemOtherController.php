@@ -39,7 +39,7 @@ class SystemOtherController extends Controller
         $so = SystemOther::find($request->id);
         $so->toastr = $request->toastr;
         $so->phone  = $request->phone;
-        $so->moeny  = $request->money;
+        $so->money  = $request->money;
 
         if (!is_null($request->about_image)){
             $so->about_image = UploadTool::upload_once($request, 'about_image');
