@@ -26,19 +26,20 @@ class SystemOtherController extends Controller
     }
 
 
-    public function edit($id, Content $content)
-    {
-        return $content
-            ->header('Edit')
-            ->description('description')
-            ->body($this->form()->edit($id));
-    }
+//    public function edit($id, Content $content)
+//    {
+//        return $content
+//            ->header('Edit')
+//            ->description('description')
+//            ->body($this->form()->edit($id));
+//    }
 
     public function update(Request $request)
     {
         $so = SystemOther::find($request->id);
         $so->toastr = $request->toastr;
         $so->phone  = $request->phone;
+        $so->moeny  = $request->money;
 
         if (!is_null($request->about_image)){
             $so->about_image = UploadTool::upload_once($request, 'about_image');
@@ -79,6 +80,7 @@ class SystemOtherController extends Controller
         $form->hidden('id');
         $form->text('toastr', '系统通知');
         $form->mobile('phone','客服联系方式');
+        $form->number('money','押金');
         $form->image('logo','LOGO');
         $form->image('about_image','关于我们');
         $form->image('user_instructions','用户须知');
