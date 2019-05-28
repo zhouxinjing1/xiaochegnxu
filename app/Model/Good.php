@@ -27,21 +27,14 @@ class Good extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function getTransmissionAttribute ($value)
+
+    public function getTypeAttribute($value)
     {
         switch ($value) {
             case 1:
-                return '手动变速箱';
-            case 2:
-                return '自动变速箱';
-            case 3:
-                return '手自一体';
-            case 4:
-                return '无极变速箱';
-            case 5:
-                return 'DSG变速箱';
-            case 6:
-                return '序列变速箱';
+                return '拍卖';
+            case 0:
+                return '免费发布';
         }
     }
 

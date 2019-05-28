@@ -44,6 +44,7 @@ class GoodController extends Controller
         $good->type = $request->type;
         $good->price = $request->price;
         $good->money = $request->money;
+        $good->bond  = $request->bond;
 
         if ($good->save()) {
             return ReturnJson::response([],'200','发布成功');

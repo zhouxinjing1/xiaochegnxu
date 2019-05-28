@@ -28,5 +28,8 @@ Route::group([
     // 车辆信息
     $router->resource('/good','GoodController');
 
+    // 审核表
+    $router->resource('/examine','ExamineController');
+    $router->post('/examine/adopt/{id}','ExamineController@adopt');
 
 });
