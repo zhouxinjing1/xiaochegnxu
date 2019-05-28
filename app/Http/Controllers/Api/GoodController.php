@@ -26,6 +26,7 @@ class GoodController extends Controller
         $good->year = spellCity($request->year,0,'-');
         $good->mileage = $request->mileage;
         $good->city = $request->city[1];
+        $good->province = $request->city[0];
         $good->change_number = $request->change_number;
         $good->overview = $request->overview;
         $good->car_is = $request->car_is;
@@ -62,7 +63,13 @@ class GoodController extends Controller
      */
     public function Recommend(Request $request, Good $good)
     {
-        $data = $good->status()->reco()->recommend()->offset($request->page)->paginate($this->limit);
+        $data = $good->status()
+                     ->reco()
+                     ->recommend()
+                     ->offset($request->page)
+                     ->select('id', 'brand', 'displacement', 'transmission', 'year', 'city', 'mileage', 'city', 'province',
+                         'car_is', 'money', 'type')
+                     ->paginate($this->limit);
 
         return new GoodCollection($data);
     }
