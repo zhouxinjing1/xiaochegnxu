@@ -10,7 +10,7 @@ use App\Http\Resources\GoodCollection;
 
 class GoodController extends Controller
 {
-    private $limit = 3;
+    private $limit = 5;
 
     /**
      * 发布商品
@@ -48,6 +48,7 @@ class GoodController extends Controller
         $good->price = $request->price;
         $good->money = $request->money;
         $good->bond  = $request->bond;
+        $good->pay_status = $request->pay_status;
 
         if ($good->save()) {
             return ReturnJson::response([],'200','发布成功');
