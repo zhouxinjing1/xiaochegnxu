@@ -25,6 +25,9 @@ Route::group([
 
     $router->post('/good/createGood', 'GoodController@createGood')->middleware('verificationLogin');
     $router->post('/upload/uploadImage', 'UploadController@uploadImage');
+
+    // 推荐商品
+    $router->get('/good/Recommend','GoodController@Recommend')->where(['page' => '[0-9]+']);
 });
 
 

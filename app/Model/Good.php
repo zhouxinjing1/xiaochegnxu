@@ -17,9 +17,40 @@ class Good extends Model
     {
         parent::boot();
 
+        // 是否支付
         static::addGlobalScope(function(Builder $builder) {
             $builder->where('pay_status',1);
         });
+    }
+
+    /**
+     * 通过
+     * @param $query
+     * @return mixed
+     */
+    public function scopeStatus($query)
+    {
+        return $query->where('status', 1);
+    }
+
+    /**
+     * 推荐
+     * @param $query
+     * @return mixed
+     */
+    public function scopeReco($query)
+    {
+        return $query->where('reco', 1);
+    }
+
+    /**
+     * 推荐排序
+     * @param $query
+     * @return mixed
+     */
+    public function scopeRecommend($query)
+    {
+        return $query->orderBy('orders', 'desc')->orderBy('price', 'desc')->orderBy('created_at', 'desc');
     }
 
     public function user()

@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Good;
 use App\Http\Controllers\Common\ReturnJson;
+use App\Http\Resources\GoodCollection;
 
 class GoodController extends Controller
 {
+    private $limit = 3;
+
     /**
      * 发布商品
      * @param Request $request
@@ -49,7 +52,18 @@ class GoodController extends Controller
         if ($good->save()) {
             return ReturnJson::response([],'200','发布成功');
         }
-
         return ReturnJson::response([],'300','发布失败');
     }
+
+    /**
+     * 排序方式 : 推荐 -> 自定义排序 -> 设置保留价 ->创建时间
+     * 推荐商品
+     */
+    public function Recommend(Request $request, Good $good)
+    {
+        $data = $good->status()->reco()->recommend()->offset($request->page)->paginate($this->limit);
+
+        return new GoodCollection($data);
+    }
+
 }
