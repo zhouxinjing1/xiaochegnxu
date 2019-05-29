@@ -28,6 +28,12 @@ Route::group([
 
     // 推荐商品
     $router->get('/good/Recommend','GoodController@Recommend')->where(['page' => '[0-9]+']);
+
+    // 免费商品
+    $router->get('/good/freeList','GoodController@freeList')->where(['page' => '[0-9]+']);
+
+    // 商品详情
+    $router->get('/good/GoodInfo','GoodController@GoodInfo')->where(['good_id' => '[0-9]+']);
 });
 
 

@@ -74,4 +74,33 @@ class GoodController extends Controller
         return new GoodCollection($data);
     }
 
+    /**
+     * 免费发布
+     * @param Request $request
+     * @param Good $good
+     */
+    public function freeList(Request $request, Good $good)
+    {
+        $data = $good->status()
+                     ->where('type', 0)
+                     ->free()
+                     ->offset($request->page)
+                     ->select('id', 'brand', 'displacement', 'transmission', 'year', 'city', 'mileage', 'city', 'province',
+                        'car_is', 'money', 'type')
+                     ->paginate($this->limit);
+
+        return new GoodCollection($data);
+    }
+
+    /**
+     * 商品详情
+     * @param Request $request
+     * @param Good $good
+     */
+    public function GoodInfo(Request $request, Good $good)
+    {
+        $data = $good->find($request->good_id);
+
+        return ReturnJson::response($data,200,'成功');
+    }
 }

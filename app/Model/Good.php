@@ -53,6 +53,14 @@ class Good extends Model
         return $query->orderBy('orders', 'desc')->orderBy('price', 'desc')->orderBy('created_at', 'desc');
     }
 
+    /**
+     *  免费发布
+     */
+    public function scopeFree($query)
+    {
+        return $query->orderBy('orders', 'desc')->orderBy('created_at', 'desc');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
