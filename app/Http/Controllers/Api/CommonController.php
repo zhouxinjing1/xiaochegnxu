@@ -54,7 +54,7 @@ class CommonController extends Controller
      */
     public function getNewList(Request $request)
     {
-        $data = News::select('id', 'title', 'image', 'created_at', 'summary')->offset($request->page)->paginate($this->limit);
+        $data = News::select('id', 'title', 'image', 'created_at', 'summary', 'contents')->offset($request->page)->paginate($this->limit);
 
         return new NewCollection($data);
     }
